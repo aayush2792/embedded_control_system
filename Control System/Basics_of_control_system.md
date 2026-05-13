@@ -1,5 +1,3 @@
-// ...existing code...
-
 # Basics of a Control System
 
 A control system is a set of components that manage, command, direct, or regulate the behavior of other devices or systems to achieve a desired output. Typical goals are to make the system stable, accurate, fast, and robust to disturbances and modeling errors.
@@ -53,3 +51,53 @@ $$
 - Sensor noise and filtering trade-offs (delay vs noise reduction)
 - Time delays can destabilize closed-loop systems
 - Nonlinearities may invalidate linear design assumptions
+
+### Example applications
+
+- Room thermostat (temperature regulation)  
+    - Description: maintain indoor temperature despite weather and occupancy changes.  
+    - Simple model: thermal capacitance and resistance, C dT/dt = -(T - Tamb)/R + Q_in.  
+    - Measurement and drive: thermometer for feedback, heater/AC as the actuator.  
+    - Typical controller: bang–bang with hysteresis or a PID-like regulator to reduce steady-state error.
+
+- Automotive cruise control (speed maintenance)  
+    - Description: hold vehicle speed under varying slopes and loads.  
+    - Simplified dynamics: m dv/dt = -b v + u where u is propulsion force.  
+    - Sensing and actuation: speed sensor (wheel encoder) and throttle actuator.  
+    - Typical controller: PI or state-feedback; feedforward for slope compensation.
+
+- DC motor speed/position control  
+    - Description: regulate rotational speed or position of a shaft.  
+    - Key equations: electrical and mechanical coupling (L di/dt + R i + K_b ω = V; J dω/dt + B ω = K_t i - τ_load).  
+    - Hardware: encoder for position/speed, H-bridge or driver for voltage/torque.  
+    - Typical controller: cascaded PI (current loop + speed/position loop) or full-state feedback.
+
+- Inverted pendulum on a cart (balancing)  
+    - Description: stabilize an unstable upright equilibrium and move the cart to a target.  
+    - Model: nonlinear pendulum dynamics linearized about upright for controller design.  
+    - Sensors/actuators: angle encoder/IMU and a horizontal force actuator on the cart.  
+    - Typical controller: LQR or pole-placement for stabilization, sometimes augmented with observers.
+
+- Liquid-level control in a tank  
+    - Description: keep a liquid level constant despite fluctuating inflow.  
+    - Model: A dh/dt = q_in - q_out(h) (often nonlinear outflow), or linearized integrator.  
+    - Instrumentation: level sensor and control valve on inflow or outflow.  
+    - Typical controller: PI or MPC when interacting with other process constraints.
+
+- Quadcopter attitude control  
+    - Description: maintain desired roll, pitch, and yaw angles during flight.  
+    - Dynamics: rotational inertia and torques from propellers; coupling between axes.  
+    - Sensors/actuators: IMU (gyros/accel) and variable-speed motors.  
+    - Typical architecture: cascaded PID or model-based controllers with rate and angle loops.
+
+- Magnetic levitation (maglev) stage  
+    - Description: suspend and position a ferromagnetic object without contact.  
+    - Dynamics: strongly nonlinear relation between coil current and magnetic force.  
+    - Sensing and actuation: position sensor and coil current driver.  
+    - Typical controller: nonlinear control or linearized feedback with observers for robustness.
+
+- Chemical reactor temperature control (CSTR)  
+    - Description: regulate reactor temperature to ensure reaction performance and safety.  
+    - Features: strong nonlinearities and time delays; heat removal via coolant flow.  
+    - Actuation and sensing: thermocouples and coolant valve/pump.  
+    - Typical controller: PID for simple loops, MPC when constraints and interactions are important.
