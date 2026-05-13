@@ -49,6 +49,7 @@ $$
 
 ## Simple example (PID idea)
 If plant is $G(s)$ and controller is $C(s)$, closed-loop transfer from reference $R(s)$ to output $Y(s)$ is
+
 $$
 T(s)=\frac{C(s)G(s)}{1 + C(s)G(s)}.
 $$
